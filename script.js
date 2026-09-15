@@ -3,7 +3,7 @@ let tournamentPlayers = [];
 let currentRoundPlayers = [];
 let currentRound = 1;
 let roundWinners = [];
-let activeTournamentId = null;
+let activeTournamentId = localStorage.getItem("easyFootballActiveTournament") || null;
 let tournaments = loadTournaments();
 
 function loadTournaments() {
@@ -69,6 +69,7 @@ function createTournament() {
   };
   tournaments.push(tournament);
   activeTournamentId = tournament.id;
+  localStorage.setItem("easyFootballActiveTournament",activeTournamentId);
   saveTournaments();
   openTournament(tournament.id, false);
   renderTournamentDashboard();
@@ -356,6 +357,13 @@ createTournament = function () {
 const originalOpenTournament = openTournament;
 openTournament = function (id, shouldScroll = true) {
   const tournament = tournaments.find(item => item.id === id);
+
+  if(tournament){
+   activeTournamentId = id;
+
+   localStorage.setItem("easyFootballActiveTournament",activeTournamentId);
+  }
+
   if (tournament && tournament.format !== "knockout" && !tournament.fixtures) {
     createCompetitionData(tournament, tournament.groupCount || 2);
     saveTournaments();
@@ -470,3 +478,18 @@ function removeTournament(id) {
 function resetTournamentView() {
   document.getElementById("currentTournament").textContent = "No tournament created yet"; document.getElementById("totalPlayers").textContent = "0"; document.getElementById("currentFormat").textContent = "—"; document.getElementById("championName").textContent = "🏆"; document.getElementById("tournamentDescription").textContent = "Create your first tournament above."; document.getElementById("tournamentSettings").hidden = true; document.getElementById("playersList").replaceChildren(); document.getElementById("knockoutSection").hidden = true; document.getElementById("competitionSection").hidden = true;
 }
+
+document.addEventListener("DOMContent Loaded",() => {
+  renderTournamentDashboard();
+
+if(activeTournamentId && tournaments.some(t => t.id===
+  activeTournamentId)) {
+    openTournament(activeTournamentId, false);
+} else if(tournaments.length > 0) {
+  activeTournamentId = tournaments[0].id;
+
+  localStorage.setItem("easyFootballActiveTournament",
+activeTournamentId);
+ openTournament(activeTournamentId,false);
+  }
+});
