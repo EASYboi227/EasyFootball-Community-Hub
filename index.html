@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyFootball Community Hub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo-area"><div class="logo">⚽</div><div><h1>EasyFootball</h1><p>Community Hub</p></div></div>
+    <nav><a href="#home">Home</a><a href="#create">Create</a><a href="#activeTournaments">Tournaments</a><a href="#competitionSection">Competition</a><a href="#players">Players</a></nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-text"><p class="small-title">WELCOME TO</p><h2>EasyFootball<br><span>Community Hub</span></h2><p>Create tournaments, manage players, record matches and find your champion.</p><button type="button" onclick="scrollToCreate()">Create Tournament</button></div>
+    <div class="football">⚽</div>
+  </section>
+
+  <section id="create" class="section">
+    <div class="section-title"><p>TOURNAMENT MANAGER</p><h2>Create Tournament</h2></div>
+    <div class="creator">
+      <label for="tournamentName">Tournament Name</label><input type="text" id="tournamentName" placeholder="e.g. EasyFootball Tournament #002">
+      <label for="playerCount">Number of Players</label><select id="playerCount"><option value="8">8 Players</option><option value="16">16 Players</option><option value="32">32 Players</option><option value="64">64 Players</option></select>
+      <label for="tournamentFormat">Tournament Format</label><select id="tournamentFormat" onchange="formatChanged()"><option value="knockout">Knockout</option><option value="group">Group Stage</option><option value="group-knockout">Group Stage + Knockout</option><option value="league">League</option></select>
+      <div id="groupOptions" class="group-options"><label for="groupCount">Number of Groups</label><select id="groupCount"><option value="2">2 Groups</option><option value="4">4 Groups</option><option value="8">8 Groups</option></select></div>
+      <button type="button" onclick="generatePlayers()">Continue</button><div id="playerInputs"></div><button type="button" id="createButton" class="create-button" onclick="createTournament()" hidden>Create Tournament</button><div id="tournamentResult" role="status"></div>
+    </div>
+  </section>
+
+  <!-- This dashboard is deliberately HTML, not injected by JavaScript. -->
+  <section id="activeTournaments" class="section active-tournaments">
+    <div class="section-title"><p>COMMUNITY</p><h2>Active Tournaments</h2><span>Open a tournament to make it the current one.</span></div>
+    <div id="tournamentGrid" class="tournament-grid" aria-live="polite"></div>
+  </section>
+
+  <section id="tournament" class="section">
+    <div class="section-title"><p>TOURNAMENT</p><h2 id="currentTournament">No tournament created yet</h2></div>
+    <div class="tournament-card"><span class="status">● READY</span><p id="tournamentDescription">Create your first tournament above.</p><div id="tournamentSettings" class="tournament-settings" hidden></div><div class="tournament-info"><div><strong id="totalPlayers">0</strong><span>Players</span></div><div><strong id="currentFormat">—</strong><span>Format</span></div><div><strong id="championName">🏆</strong><span>Champion</span></div></div></div>
+  </section>
+
+  <section id="knockoutSection" class="section knockout-section" hidden><div class="section-title"><p>MATCH CENTER</p><h2>Knockout Tournament</h2></div><div id="roundContainer"></div></section>
+  <section id="competitionSection" class="section competition-section" hidden><div class="section-title"><p>MATCH CENTER</p><h2 id="competitionTitle">Fixtures and Standings</h2><span id="competitionHelp"></span></div><div id="competitionContent"></div></section>
+  <section id="matches" class="section dark-section"><div class="section-title"><p>MATCH CENTER</p><h2>Recent Matches</h2></div><div class="matches"><div class="match-card"><div class="player"><span>Player 1</span><strong>3</strong></div><div class="vs">VS</div><div class="player"><strong>1</strong><span>Player 2</span></div><p class="winner">🏆 Winner: Player 1</p></div></div></section>
+  <section id="players" class="section"><div class="section-title"><p>TOURNAMENT PARTICIPANTS</p><h2>Players</h2></div><div class="players" id="playersList"></div></section>
+  <section class="cta"><h2>Ready to compete?</h2><p>Create a tournament and prove yourself.</p><button type="button" onclick="scrollToCreate()">Start Tournament</button></section>
+  <footer><h3>⚽ EasyFootball Community Hub</h3><p>Built for eFootball players and tournament lovers.</p><p class="copyright">© 2026 EasyFootball Community Hub</p></footer>
+  <script src="script.js"></script>
+</body>
+</html>
