@@ -1,2 +1,112 @@
 *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}body{font-family:Arial,sans-serif;background:#f5f7fa;color:#111}header{width:100%;padding:20px 8%;display:flex;justify-content:space-between;align-items:center;background:#111;color:#fff;position:sticky;top:0;z-index:100}.logo-area{display:flex;align-items:center;gap:10px}.logo{font-size:35px}.logo-area h1{font-size:20px}.logo-area p,footer p{font-size:12px;color:#aaa}nav{display:flex;gap:25px;flex-wrap:wrap;justify-content:center}nav a{color:#fff;text-decoration:none;font-size:14px}nav a:hover{color:#00ff88}.hero{min-height:600px;background:linear-gradient(120deg,#07140e,#10291d);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:80px 10%;overflow:hidden}.hero-text{max-width:600px}.small-title,.section-title p{color:#00ff88;font-weight:bold;letter-spacing:3px;margin-bottom:15px}.hero h2{font-size:65px;line-height:1;margin-bottom:25px}.hero h2 span{color:#00ff88}.hero-text>p{color:#ccc;line-height:1.7;margin-bottom:30px}button{border:0;padding:13px 22px;border-radius:8px;background:#00ff88;color:#06130c;font-weight:bold;cursor:pointer;transition:.2s}button:hover{transform:translateY(-2px);background:#fff}button:disabled{cursor:default;opacity:.6;transform:none}.football{font-size:250px;animation:spin 8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.section{padding:80px 10%}.section-title{text-align:center;margin-bottom:45px}.section-title p{color:#00a85a;font-size:13px;margin-bottom:8px}.section-title h2{font-size:38px}.section-title span{color:#666}.creator,.tournament-card,.ef-tournament-card{background:#fff;padding:35px;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,.08)}.creator{max-width:650px;margin:auto}.creator label{display:block;font-weight:bold;margin:20px 0 8px}.creator input,.creator select,.knockout-player input,.fixture-score{width:100%;padding:14px;border:1px solid #ddd;border-radius:8px;font-size:15px;outline:0}.creator input:focus,.creator select:focus{border-color:#00a85a}.group-options{display:none}.group-options.show{display:block}#playerInputs{margin-top:25px}.player-input{margin-bottom:12px}.create-button{width:100%;margin-top:25px}#tournamentResult{margin-top:20px;font-weight:bold;text-align:center}.active-tournaments,.competition-section{background:#eef3ef}.tournament-grid,.group-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:1100px;margin:auto}.ef-tournament-card{padding:25px}.ef-card-top{display:flex;justify-content:space-between;gap:12px;color:#666;font-size:12px}.ef-status{color:#00a85a;font-weight:bold}.ef-tournament-card h3{margin:18px 0;font-size:23px}.ef-tournament-meta{display:flex;gap:12px;margin-bottom:20px;color:#555;flex-wrap:wrap}.ef-tournament-meta span{background:#f1f5f3;padding:8px;border-radius:6px;font-size:13px}.ef-open-btn{width:100%;background:#111;color:#fff}.ef-open-btn:hover{background:#00a85a;color:#06130c}.ef-empty{grid-column:1/-1;text-align:center;background:#fff;border-radius:15px;padding:35px;color:#666}.status{color:#00a85a;font-size:12px;font-weight:bold}.tournament-card>p{color:#666;line-height:1.6}.tournament-settings{margin-top:16px;padding:16px;border-radius:10px;background:rgba(0,168,90,.08);border:1px solid rgba(0,168,90,.25)}.tournament-settings p{margin:6px 0}.tournament-info{margin-top:30px;display:flex;gap:20px}.tournament-info div{flex:1;background:#f1f5f3;padding:20px;text-align:center;border-radius:10px}.tournament-info strong{display:block;font-size:25px;margin-bottom:5px}.tournament-info span{color:#666;font-size:13px}.dark-section{background:#101713;color:#fff}.matches{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.match-card{background:#18231d;padding:25px;border-radius:12px}.player{display:flex;justify-content:space-between;align-items:center;padding:12px 0}.player strong{font-size:25px}.vs{text-align:center;color:#00ff88;font-size:12px;font-weight:bold}.winner{margin-top:15px;padding-top:15px;border-top:1px solid #334139;color:#00ff88;font-size:13px}.players{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}.player-card{background:#fff;padding:30px 20px;border-radius:12px;text-align:center;box-shadow:0 8px 20px rgba(0,0,0,.06)}.player-icon{font-size:45px;margin-bottom:15px}.player-card p{color:#00a85a;font-size:13px;margin-top:8px}.knockout-section{background:#eef3ef}.round{margin-bottom:45px}.round-title{text-align:center;font-size:24px;margin-bottom:25px}.round-matches{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}.knockout-match,.fixture-card,.standing-card{background:#fff;padding:25px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,.08)}.knockout-player{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #eee}.knockout-player input{width:60px;padding:8px;text-align:center}.submit-result{width:100%;margin-top:15px}.match-winner{text-align:center;margin-top:12px;color:#00a85a;font-weight:bold}.champion{text-align:center;background:#111;color:#fff;padding:35px;border-radius:15px}.champion h2{color:#00ff88;margin:10px}.fixture-list{display:grid;gap:15px;margin:25px auto;max-width:800px}.fixture-card{display:grid;grid-template-columns:1fr 55px 24px 55px 1fr;gap:8px;align-items:center;padding:15px}.fixture-card span:first-child{text-align:right}.fixture-score{text-align:center;padding:9px}.fixture-card button{grid-column:1/-1;margin-top:5px}.standing-card h3{margin-bottom:15px}.standing-table{width:100%;border-collapse:collapse;font-size:13px}.standing-table th,.standing-table td{padding:8px 4px;text-align:left;border-bottom:1px solid #e5e5e5}.standing-table th:last-child,.standing-table td:last-child{text-align:right}.cta{padding:80px 10%;text-align:center;background:#00ff88}.cta h2{font-size:40px;margin-bottom:15px}.cta p{margin-bottom:25px}.cta button{background:#111;color:#fff}footer{background:#090d0b;color:#fff;text-align:center;padding:45px 20px}.copyright{margin-top:25px}@media(max-width:800px){header{flex-direction:column;gap:15px}nav{gap:12px}nav a{font-size:12px}.hero{flex-direction:column;text-align:center;padding:70px 7%}.hero h2{font-size:45px}.football{font-size:120px;margin-top:40px}.matches{grid-template-columns:1fr}.players{grid-template-columns:repeat(2,1fr)}.tournament-info{flex-direction:column}.section{padding:60px 7%}.creator{padding:25px 20px}.fixture-card{grid-template-columns:1fr 48px 18px 48px 1fr;font-size:13px}.fixture-card span{overflow-wrap:anywhere}.fixture-card button{padding:11px}.section-title h2{font-size:30px}}
  .proof-area{grid-column:1/-1;margin-top:8px;padding:10px;background:#f1f5f3;border-radius:8px}.proof-area label{display:block;font-size:13px;font-weight:bold;margin-bottom:6px}.proof-area input{width:100%;font-size:12px}.proof-preview{display:block;max-width:100%;max-height:180px;margin-top:10px;border-radius:7px}.proof-note{font-size:12px;color:#666;margin-top:6px}.ef-card-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.ef-remove-btn{background:#fff;color:#b42318;border:1px solid #f0b7b3}.ef-remove-btn:hover{background:#fff1f0}.knockout-match .proof-area{margin-top:14px}@media print{header,.hero,#create,#activeTournaments,#matches,.cta,footer,button,.proof-area{display:none!important}.section{padding:20px 4%}.tournament-card,.knockout-match,.fixture-card,.standing-card{box-shadow:none;border:1px solid #ddd}}
+
+/* ================================
+   DEADLINE SYSTEM
+================================ */
+
+.deadline-box {
+  grid-column: 1 / -1;
+  margin-top: 12px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #f1f5f3;
+  border: 1px solid #dce8df;
+}
+
+.deadline-box strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.deadline-date {
+  color: #444;
+  font-size: 13px;
+  margin-bottom: 7px;
+}
+
+.deadline-status {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+.deadline-countdown {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.deadline-upcoming {
+  background: #e7f7ed;
+  color: #087f3f;
+}
+
+.deadline-soon {
+  background: #fff4d6;
+  color: #9a6500;
+}
+
+.deadline-overdue {
+  background: #ffe8e6;
+  color: #b42318;
+}
+
+.deadline-completed {
+  background: #e7f7ed;
+  color: #087f3f;
+}
+
+.deadline-none {
+  background: #eee;
+  color: #666;
+}
+
+.deadline-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.deadline-controls input {
+  min-width: 0;
+  padding: 9px;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  background: #fff;
+}
+
+.deadline-save {
+  padding: 9px 12px;
+}
+
+/* ================================
+   SHARE BUTTON
+================================ */
+
+.ef-share-btn {
+  background: #00a85a;
+  color: #fff;
+}
+
+.ef-share-btn:hover {
+  background: #111;
+  color: #fff;
+}
+
+/* ================================
+   MOBILE DEADLINES
+================================ */
+
+@media (max-width: 600px) {
+  .deadline-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .deadline-save {
+    width: 100%;
+  }
+}
