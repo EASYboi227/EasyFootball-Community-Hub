@@ -46,5 +46,25 @@
   <section class="cta"><h2>Ready to compete?</h2><p>Create a tournament and prove yourself.</p><button type="button" onclick="scrollToCreate()">Start Tournament</button></section>
   <footer><h3>⚽ EasyFootball Community Hub</h3><p>Built for eFootball players and tournament lovers.</p><p class="copyright">© 2026 EasyFootball Community Hub</p></footer>
   <script src="script.js"></script>
+<!-- EasyFootball Admin Login -->
+<div id="efAdminLogin" style="display:none; position:fixed; inset:0; background:#101827; z-index:99999; align-items:center; justify-content:center; padding:20px;">
+  <div style="background:#fff; color:#111; padding:25px; border-radius:15px; width:100%; max-width:380px;">
+    <h2>🔐 EasyFootball Admin</h2>
+    <p>Sign in to access admin controls.</p>
+
+    <form id="efAdminLoginForm">
+      <label for="efAdminEmail">Email</label>
+      <input id="efAdminEmail" type="email" required autocomplete="username" style="display:block;width:100%;padding:12px;margin:8px 0 15px;box-sizing:border-box;">
+
+      <label for="efAdminPassword">Password</label>
+      <input id="efAdminPassword" type="password" required autocomplete="current-password" style="display:block;width:100%;padding:12px;margin:8px 0 15px;box-sizing:border-box;">
+
+      <button type="submit" style="width:100%;padding:12px;background:#1677ff;color:white;border:0;border-radius:8px;">Sign In</button>
+      <p id="efAdminLoginMessage" role="status"></p>
+    </form>
+
+    <button type="button" id="efAdminCancel" style="padding:10px;">Cancel</button>
+  </div>
+</div>
 </body>
 </html>
