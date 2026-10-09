@@ -2235,3 +2235,56 @@ const EF_STORAGE_KEY = "easyFootballTournaments";
 
 loadSharedTournament();
 })();
+// EASYFOOTBALL ADMIN LOGIN
+const efAdminForm = document.getElementById("efAdminLoginForm");
+const efAdminOverlay = document.getElementById("efAdminLogin");
+const efAdminMessage = document.getElementById("efAdminLoginMessage");
+
+if (efAdminForm) {
+  efAdminForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    efAdminMessage.textContent = "Signing in...";
+
+    try {
+      const response = await fetch(
+        `${EF_SUPABASE_URL}/auth/v1/token?grant_type=password`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: EF_SUPABASE_KEY
+          },
+          body: JSON.stringify({
+            email: document.getElementById("efAdminEmail").value.trim(),
+            password: document.getElementById("efAdminPassword").value
+          })
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.msg || result.message || "Login failed.");
+      }
+
+      sessionStorage.setItem("efAdminAccessToken", result.access_token);
+      sessionStorage.setItem("efAdminUser", JSON.stringify(result.user));
+
+      efAdminMessage.textContent = "Login successful!";
+      efAdminMessage.style.color = "green";
+
+    } catch (error) {
+      efAdminMessage.textContent = error.message;
+      efAdminMessage.style.color = "red";
+    }
+  });
+}
+
+const efAdminCancel = document.getElementById("efAdminCancel");
+
+if (efAdminCancel && efAdminOverlay) {
+  efAdminCancel.addEventListener("click", function () {
+    efAdminOverlay.style.display = "none";
+  });
+}
