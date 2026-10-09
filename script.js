@@ -2086,3 +2086,135 @@ document.addEventListener(
     startDeadlineTimer();
   }
 );
+// EASYFOOTBALL SUPABASE SYNC
+const EF_SUPABASE_URL = https://lyomzyrobdrgqkkytjsm.supabase.co;
+const EF_SUPABASE_KEY = sb_publishable_w3OkalhrAXszvAm1-jAvLQ_W0vhBYzO;
+
+const EF_STORAGE_KEY = "easyFootballTournaments";
+
+(function () {
+  const originalSetItem = Storage.prototype.setItem;
+  let loadingRemote = false;
+  let uploadTimer;
+
+  async function uploadTournaments(value) {
+    if (loadingRemote) return;
+
+    try {
+      const tournaments = JSON.parse(value);
+
+      if (!Array.isArray(tournaments)) return;
+
+      const rows = tournaments
+        .filter(t => t && t.id != null)
+        .map(t => ({
+          id: String(t.id),
+          tournament_data: t,
+          updated_at: new Date().toISOString()
+        }));
+
+      if (!rows.length) return;
+
+      const response = await fetch(
+        `${EF_SUPABASE_URL}/rest/v1/tournaments?on_conflict=id`,
+        {
+          method: "POST",
+          headers: {
+            apikey: EF_SUPABASE_KEY,
+            Authorization: `Bearer ${EF_SUPABASE_KEY}`,
+            "Content-Type": "application/json",
+            Prefer: "resolution=merge-duplicates,return=minimal"
+          },
+          body: JSON.stringify(rows)
+        }
+      );
+
+      if (!response.ok) {
+        console.error("EasyFootball sync failed:", await response.text());
+      } else {
+        console.log("EasyFootball tournaments synced.");
+      }
+    } catch (error) {
+      console.error("EasyFootball sync error:", error);
+    }
+  }
+
+  Storage.prototype.setItem = function (key, value) {
+    originalSetItem.call(this, key, value);
+
+    if (
+      this === localStorage &&
+      key === EF_STORAGE_KEY &&
+      !loadingRemote
+    ) {
+      clearTimeout(uploadTimer);
+      uploadTimer = setTimeout(() => uploadTournaments(value), 500);
+    }
+  };
+
+  async function loadSharedTournament() {
+    const sharedId = new URLSearchParams(location.search)
+      .get("tournament");
+
+    if (!sharedId) return;
+
+    try {
+      const response = await fetch(
+        `${EF_SUPABASE_URL}/rest/v1/tournaments?select=id,tournament_data&id=eq.${encodeURIComponent(sharedId)}&limit=1`,
+        {
+          headers: {
+            apikey: EF_SUPABASE_KEY,
+            Authorization: `Bearer ${EF_SUPABASE_KEY}`
+          }
+        }
+      );
+
+      if (!response.ok) {
+        console.error("Could not load shared tournament:", await response.text());
+        return;
+      }
+
+      const rows = await response.json();
+      if (!rows.length) return;
+
+      const remoteTournament = rows[0].tournament_data;
+      const current = JSON.parse(
+        localStorage.getItem(EF_STORAGE_KEY) || "[]"
+      );
+
+      if (!Array.isArray(current)) return;
+
+      const existing = current.findIndex(
+        t => String(t.id) === String(remoteTournament.id)
+      );
+
+      if (
+        existing !== -1 &&
+        JSON.stringify(current[existing]) === JSON.stringify(remoteTournament)
+      ) {
+        return;
+      }
+
+      if (existing !== -1) {
+        current[existing] = remoteTournament;
+      } else {
+        current.push(remoteTournament);
+      }
+
+      loadingRemote = true;
+      originalSetItem.call(
+        localStorage,
+        EF_STORAGE_KEY,
+        JSON.stringify(current)
+      );
+      loadingRemote = false;
+
+      location.reload();
+    } catch (error) {
+      loadingRemote = false;
+      console.error("Could not load shared tournament:", error);
+    }
+  }
+
+  loadSharedTournament();
+})();
