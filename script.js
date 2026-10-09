@@ -2153,68 +2153,85 @@ const EF_STORAGE_KEY = "easyFootballTournaments";
   };
 
   async function loadSharedTournament() {
-    const sharedId = new URLSearchParams(location.search)
-      .get("tournament");
+  const sharedId = new URLSearchParams(location.search)
+    .get("tournament");
 
-    if (!sharedId) return;
+  try {
+    const endpoint =
+      `${EF_SUPABASE_URL}/rest/v1/tournaments?select=id,tournament_data` +
+      (sharedId
+        ? `&id=eq.${encodeURIComponent(sharedId)}`
+        : "");
 
-    try {
-      const response = await fetch(
-        `${EF_SUPABASE_URL}/rest/v1/tournaments?select=id,tournament_data&id=eq.${encodeURIComponent(sharedId)}&limit=1`,
-        {
-          headers: {
-            apikey: EF_SUPABASE_KEY,
-            Authorization: `Bearer ${EF_SUPABASE_KEY}`
-          }
-        }
-      );
-
-      if (!response.ok) {
-        console.error("Could not load shared tournament:", await response.text());
-        return;
+    const response = await fetch(endpoint, {
+      headers: {
+        apikey: EF_SUPABASE_KEY,
+        Authorization: `Bearer ${EF_SUPABASE_KEY}`
       }
+    });
 
-      const rows = await response.json();
-      if (!rows.length) return;
+    if (!response.ok) {
+      console.error(
+        "Could not load tournaments:",
+        await response.text()
+      );
+      return;
+    }
 
-      const remoteTournament = rows[0].tournament_data;
-      const current = JSON.parse(
-        localStorage.getItem(EF_STORAGE_KEY) || "[]"
+    const rows = await response.json();
+
+    if (!Array.isArray(rows) || rows.length === 0) return;
+
+    const current = JSON.parse(
+      localStorage.getItem(EF_STORAGE_KEY) || "[]"
+    );
+
+    if (!Array.isArray(current)) return;
+
+    let changed = false;
+
+    for (const row of rows) {
+      const tournament = row.tournament_data;
+
+      if (!tournament) continue;
+
+      const tournamentId = String(tournament.id ?? row.id);
+      const index = current.findIndex(
+        item => String(item.id) === tournamentId
       );
 
-      if (!Array.isArray(current)) return;
-
-      const existing = current.findIndex(
-        t => String(t.id) === String(remoteTournament.id)
-      );
-
-      if (
-        existing !== -1 &&
-        JSON.stringify(current[existing]) === JSON.stringify(remoteTournament)
+      if (index === -1) {
+        current.push(tournament);
+        changed = true;
+      } else if (
+        JSON.stringify(current[index]) !==
+        JSON.stringify(tournament)
       ) {
-        return;
+        current[index] = tournament;
+        changed = true;
       }
+    }
 
-      if (existing !== -1) {
-        current[existing] = remoteTournament;
-      } else {
-        current.push(remoteTournament);
-      }
-
+    if (changed) {
       loadingRemote = true;
-      originalSetItem.call(
-        localStorage,
-        EF_STORAGE_KEY,
-        JSON.stringify(current)
-      );
-      loadingRemote = false;
+
+      try {
+        originalSetItem.call(
+          localStorage,
+          EF_STORAGE_KEY,
+          JSON.stringify(current)
+        );
+      } finally {
+        loadingRemote = false;
+      }
 
       location.reload();
-    } catch (error) {
-      loadingRemote = false;
-      console.error("Could not load shared tournament:", error);
     }
+  } catch (error) {
+    loadingRemote = false;
+    console.error("Tournament loading failed:", error);
   }
+}
 
-  loadSharedTournament();
+loadSharedTournament();
 })();
