@@ -2087,8 +2087,8 @@ document.addEventListener(
   }
 );
 // EASYFOOTBALL SUPABASE SYNC
-const EF_SUPABASE_URL = https://lyomzyrobdrgqkkytjsm.supabase.co;
-const EF_SUPABASE_KEY = sb_publishable_w3OkalhrAXszvAm1-jAvLQ_W0vhBYzO;
+const EF_SUPABASE_URL = "https://lyomzyrobdrgqkkytjsm.supabase.co";
+const EF_SUPABASE_KEY = "sb_publishable_w3OkalhrAXszvAm1-jAvLQ_W0vhBYzO";
 
 const EF_STORAGE_KEY = "easyFootballTournaments";
 
