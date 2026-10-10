@@ -2272,8 +2272,11 @@ if (efAdminForm) {
       sessionStorage.setItem("efAdminUser", JSON.stringify(result.user));
 
       efAdminMessage.textContent = "Login successful!";
-      efAdminMessage.style.color = "green";
+efAdminMessage.style.color = "green";
 
+setTimeout(() => {
+  efAdminOverlay.style.display = "none";
+}, 500);
     } catch (error) {
       efAdminMessage.textContent = error.message;
       efAdminMessage.style.color = "red";
